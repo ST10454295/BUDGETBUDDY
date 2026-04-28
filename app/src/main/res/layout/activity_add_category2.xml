@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Category"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#D81B60" />
+
+    <EditText
+        android:id="@+id/etCategory"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Enter category name"
+        android:layout_marginTop="20dp"
+        android:background="@android:drawable/edit_text" />
+
+    <Button
+        android:id="@+id/btnSaveCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Category"
+        android:textColor="#D81B60"
+        android:backgroundTint="#FFE8E8"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>
