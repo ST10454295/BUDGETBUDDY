@@ -15,7 +15,7 @@ class SplashActivity2 : AppCompatActivity() {
         enableEdgeToEdge()
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, LoginActivity2::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, 3000)
         setContentView(R.layout.activity_splash2)

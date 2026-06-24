@@ -6,20 +6,23 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class DatabaseHelper(context: Context) :
-    SQLiteOpenHelper(context, "BudgetDB", null, 1) {
+    SQLiteOpenHelper(context, "BudgetDB", null, 2) {
 
     override fun onCreate(db: SQLiteDatabase) {
 
         db.execSQL(
-            "CREATE TABLE expenses (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "amount TEXT," +
-                    "description TEXT," +
-                    "date TEXT," +
-                    "startTime TEXT," +
-                    "endTime TEXT," +
-                    "category TEXT," +
-                    "image TEXT)"
+            """
+            CREATE TABLE expenses (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                amount REAL,
+                description TEXT,
+                date TEXT,
+                startTime TEXT,
+                endTime TEXT,
+                category TEXT,
+                image TEXT
+            )
+            """.trimIndent()
         )
     }
 
@@ -28,7 +31,6 @@ class DatabaseHelper(context: Context) :
         onCreate(db)
     }
 
-    // ✅ INSERT EXPENSE
     fun insertExpense(
         amount: String,
         description: String,
@@ -39,10 +41,10 @@ class DatabaseHelper(context: Context) :
         image: String?
     ): Boolean {
 
-        val db = this.writableDatabase
+        val db = writableDatabase
         val values = ContentValues()
 
-        values.put("amount", amount)
+        values.put("amount", amount.toDoubleOrNull() ?: 0.0)
         values.put("description", description)
         values.put("date", date)
         values.put("startTime", startTime)
@@ -50,21 +52,19 @@ class DatabaseHelper(context: Context) :
         values.put("category", category)
         values.put("image", image)
 
-        val result = db.insert("expenses", null, values)
-        return result != -1L
+        return db.insert("expenses", null, values) != -1L
     }
 
-    // ✅ GET ALL EXPENSES (THIS FIXES YOUR VIEW SCREEN)
     fun getAllExpenses(): ArrayList<ExpenseModel> {
 
         val list = ArrayList<ExpenseModel>()
-        val db = this.readableDatabase
-
+        val db = readableDatabase
         val cursor = db.rawQuery("SELECT * FROM expenses", null)
 
-        if (cursor.moveToFirst()) {
-            do {
-                val expense = ExpenseModel(
+        while (cursor.moveToNext()) {
+
+            list.add(
+                ExpenseModel(
                     id = cursor.getString(0),
                     amount = cursor.getString(1),
                     description = cursor.getString(2),
@@ -74,10 +74,7 @@ class DatabaseHelper(context: Context) :
                     category = cursor.getString(6),
                     image = cursor.getString(7)
                 )
-
-                list.add(expense)
-
-            } while (cursor.moveToNext())
+            )
         }
 
         cursor.close()

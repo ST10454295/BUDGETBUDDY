@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- HEADER -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Expenses"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:background="#D81B60"
+        android:padding="20dp"/>
+
+    <!-- TOTAL -->
+    <TextView
+        android:id="@+id/txtTotalSpent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Spent: R0.00"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#F44336"
+        android:padding="16dp"
+        android:background="#FFFFFF"/>
+
+    <!-- EXPENSE LIST -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerExpenses"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"/>
+
+</LinearLayout>

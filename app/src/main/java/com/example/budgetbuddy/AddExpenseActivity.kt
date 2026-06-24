@@ -24,7 +24,7 @@ class AddExpenseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
-        setContentView(R.layout.activity_add_expense2)
+        setContentView(R.layout.activity_add_expense)
 
         dbHelper = DatabaseHelper(this)
 
